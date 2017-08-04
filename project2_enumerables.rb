@@ -2,10 +2,10 @@ module Enumerable
 	
   def my_each
   	x = 0
-	while x < self.size
-		yield(self[x])
-		x += 1
-	end
+  	while x < self.size
+  		yield(self[x])
+  		x += 1
+  	end
   end
 
   def my_each_with_index
@@ -57,13 +57,19 @@ module Enumerable
   end
 
   def my_count
-  	results = []
-  	self.my_each do |x| 
-  		if yield(x) 
-  			results << x
-  		end
-  	end
-  	return results.length
+  	results = 0
+    if block_given?
+  	   self.my_each do |x|
+  		    if yield(x) 
+  			   results += 1
+  		    end
+  	   end
+    else
+      self.my_each do |x|
+        results += 1
+      end
+    end
+  	return results
   end
 
   def my_map
@@ -98,10 +104,5 @@ def multiply_els(array)
   end
 end
 
-times2 = Proc.new { |n| n * 2}
-
-test = [1,2,3,4]
-
-print test.my_map(&times2)
-
-
+stuff = [1, 2, 3, 4]
+print stuff.map {|n| n**n}
