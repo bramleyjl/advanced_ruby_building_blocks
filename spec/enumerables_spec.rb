@@ -10,6 +10,7 @@ module Enumerable
 			it "enumerates one value" do
 				expect{ ([1].my_each {|n| n + 1}).to yield_successive_args(2) }
 			end
+			
 
 			it "returns nil when given no value" do 
 				expect([].my_each {|n| n + 1}).to be_nil
